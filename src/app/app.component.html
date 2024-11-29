@@ -1,0 +1,112 @@
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1">ToDo App : TechSkillsIT</span>
+      <form class="d-flex" role="search">
+        <a href="https://www.techskillsit.com/track-info-angular" target="_blank">
+           Professional Angular Development Course Info
+        </a>
+      </form>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-header">
+                        Pending ToDos 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <button class="btn btn-info" (click)="showAddForm()">+Add</button>
+                    </div>
+                   
+                    <div class="card-body">
+                        <div *ngIf="isFormVisible">
+                            <input type="text" placeholder="Type your todo" 
+                                                class="form-control" [(ngModel)]="message" required>
+                            <br />
+                            <label>Start Date: </label>
+                            <input type="date"  class="form-control" [(ngModel)]="startDate">
+                            <br />
+                            <label>End Date: </label>
+                            <input type="date"  class="form-control" [(ngModel)]="endDate">
+                            <br />
+                            <button class="btn btn-secondary" (click)="addTodo()">Add todo</button>
+                        </div>
+                        <ul class="list-group mt-4">
+                            <span *ngFor="let todo of todoList;let i=index"> 
+                            <li class="list-group-item" *ngIf="todo.status === 'PENDING'">
+                                <span >
+                                    {{todo.message}}
+                                    <br>
+                                    Start Date: {{todo.startDate}}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    End Date: {{todo.endDate}}
+                                    <br /><br />
+                                    <button class="btn btn-warning" (click)="transferToCompleted(i)">Transfer to Completed</button>
+                                </span>
+                            </li>
+                        </span>
+                          </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-header">
+                        Completed ToDos
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <span *ngFor="let todo of todoList;let i=index"> 
+                            <li class="list-group-item" *ngIf="todo.status === 'COMPLETED'">
+                                <span >
+                                    {{todo.message}}
+                                    <br>
+                                    Start Date: {{todo.startDate}}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    End Date: {{todo.endDate}}
+                                    <br /><br />
+                                    <button class="btn btn-primary" (click)="archive(i)">Archive</button>
+                                </span>
+                            </li>
+                        </span>
+                          </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-header">
+                        Archived ToDos
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <span *ngFor="let todo of todoList;let i=index"> 
+                            <li class="list-group-item" *ngIf="todo.status === 'ARCHIVED'">
+                                <span >
+                                    {{todo.message}}
+                                    <br>
+                                    Start Date: {{todo.startDate}}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    End Date: {{todo.endDate}}
+                                    <br /><br />
+                                    <button class="btn btn-danger" (click)="onDelete(i)">Delete</button>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button class="btn btn-secondary" (click)="onRestore(i)">Restore</button>
+                                </span>
+                            </li>
+                        </span>
+                          </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+  </div>
